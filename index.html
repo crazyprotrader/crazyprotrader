@@ -102,6 +102,10 @@ select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--li
 .rc .tg{font-size:13px;color:var(--b)}
 .rc .sm{position:absolute;top:14px;right:14px;font-size:11px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--mute)}
 .rc p{color:var(--ink);margin:0}
+#bt{scroll-margin-top:84px}
+.ar{display:inline-block;animation:bn 1.6s ease-in-out infinite}
+@keyframes bn{50%{transform:translateY(4px)}}
+@media(prefers-reduced-motion:reduce){.ar{animation:none}}
 </style>
 </head>
 <body>
@@ -140,8 +144,9 @@ select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--li
 <a href="https://www.facebook.com/share/1E2gzCnsgH/" aria-label="Facebook"><svg class="ic"><use href="#fb"/></svg></a>
 <a href="https://www.tiktok.com/@crazy_pro_trader" aria-label="TikTok"><svg class="ic"><use href="#tt"/></svg></a>
 </div>
+<div class="row" style="justify-content:center;margin-top:18px"><button class="btn" id="sd" type="button">নিচে স্ক্রল করুন <span class="ar">↓</span></button></div>
 </header>
-<div class="glass bar"><b>Mentorship Batch-6:</b> <span style="color:var(--mute)">Coming Soon</span></div>
+<div class="glass bar" id="bt"><b>Mentorship Batch-6:</b> <span style="color:var(--mute)">Coming Soon</span></div>
 <section><h2>Welcome to Crazy Pro Trader</h2><p style="max-width:700px">Crazy Pro Trader হলো Maruf-এর প্রতিষ্ঠিত একটি trading education brand। আমাদের লক্ষ্য হলো নতুন trader-দের real trading knowledge, discipline, market understanding, risk management ও trading psychology শিখতে সাহায্য করা।</p></section>
 <section>
 <h2>আপনি কী শিখবেন</h2>
@@ -333,6 +338,7 @@ var n=$("fn").value.trim(),m=$("fm").value.trim();c("n",n.length<2,"Enter your n
 if(!ok)return;var t="Name: "+n+"\nProgram: "+$("fc").value+"\n\n"+m;try{navigator.clipboard.writeText(t)}catch(x){}
 $("fr2").innerHTML="Direct submission is not connected yet. Your feedback is ready (copied if your browser allowed it). Please send it to <a href=\"https://t.me/crazy_pro_trader0\">Telegram support</a>. It will be published only after admin approval."};
 document.querySelectorAll(".dl").forEach(function(b){b.onclick=async function(){var k=b.dataset.f,m=$("dm");m.textContent="";try{var d=window.claude?await claude.use("downloads"):null;var bin=atob(PDF[k].d),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);var bl=new Blob([u],{type:"application/pdf"});if(d){await d.save({filename:PDF[k].n,data:bl})}else{var l=document.createElement("a");l.href=URL.createObjectURL(bl);l.download=PDF[k].n;document.body.appendChild(l);l.click();l.remove()}}catch(e){if(!e||e.code!=="declined")m.textContent="The download didn’t start. Please try again or contact support."}}});
+$("sd").onclick=function(){$("bt").scrollIntoView({behavior:"smooth",block:"start"})};
 $("lg1").src=$("lg0").src;
 </script>
 </body>
