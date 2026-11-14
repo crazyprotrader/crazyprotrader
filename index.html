@@ -103,12 +103,45 @@ select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--li
 .rc .sm{position:absolute;top:14px;right:14px;font-size:11px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--mute)}
 .rc p{color:var(--ink);margin:0}
 #bt{scroll-margin-top:84px}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.9}
 .ar{display:inline-block;animation:bn 1.6s ease-in-out infinite}
 @keyframes bn{50%{transform:translateY(4px)}}
 @media(prefers-reduced-motion:reduce){.ar{animation:none}}
+
+/* ===== Premium glass UI ===== */
+.glass{position:relative;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.1);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:0 10px 34px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.04)}
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:.75;transition:opacity .3s;background:linear-gradient(135deg,color-mix(in srgb,var(--b) 65%,transparent),transparent 38%,transparent 62%,color-mix(in srgb,var(--a) 55%,transparent));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.glass:hover::after{opacity:1}
+.glass.ph{border-style:dashed}.glass.ph::after{display:none}
+.glass.card,.glass.rc{overflow:hidden}
+.glass.card::before,.glass.rc::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.12) 46%,transparent 60%);transform:translateX(-130%);transition:transform .8s ease}
+.glass.card:hover::before,.glass.rc:hover::before{transform:translateX(130%)}
+.glass.card:hover,.glass.rc:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,.45),0 0 32px color-mix(in srgb,var(--a) 28%,transparent),inset 0 1px 0 rgba(255,255,255,.3)}
+.hd{background:color-mix(in srgb,var(--bg) 52%,transparent);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.1);box-shadow:0 8px 30px rgba(0,0,0,.28),inset 0 -1px 0 rgba(255,255,255,.05)}
+@media(max-width:1000px){nav{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}}
+.btn{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 4px 16px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .25s,box-shadow .25s,border-color .25s}
+.btn:hover{transform:translateY(-2px);border-color:var(--b);box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 22px color-mix(in srgb,var(--b) 40%,transparent),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn.main{background:var(--btn);border:0;box-shadow:0 6px 22px color-mix(in srgb,var(--a) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn.main:hover{box-shadow:0 10px 30px color-mix(in srgb,var(--a) 60%,transparent),inset 0 1px 0 rgba(255,255,255,.55)}
+.soc a{box-shadow:0 4px 18px color-mix(in srgb,var(--a) 42%,transparent),inset 0 1px 0 rgba(255,255,255,.45)}
+.sw button{box-shadow:0 2px 8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.4)}
+input,textarea,select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 3px rgba(0,0,0,.25);transition:border-color .25s,box-shadow .25s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--b);box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 28%,transparent),inset 0 1px 3px rgba(0,0,0,.25)}
+option{background:var(--bg);color:var(--ink)}
+.out{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+summary{list-style:none;position:relative;padding-right:28px}summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:0;color:var(--b);font-size:22px;line-height:1.2;font-weight:700}
+details[open] summary::after{content:"\2212"}
+footer{background:linear-gradient(180deg,transparent,rgba(255,255,255,.05));-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.1)}
+.view.on{animation:vf .5s ease}
+@keyframes vf{from{opacity:0;transform:translateY(12px)}}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none;transition:opacity .7s ease,transform .3s ease,box-shadow .3s,border-color .3s}
+@media(prefers-reduced-motion:reduce){.view.on{animation:none}.rv{opacity:1;transform:none;transition:none}.glass.card:hover,.glass.rc:hover,.btn:hover{transform:none}.glass.card::before,.glass.rc::before{display:none}}
 </style>
 </head>
 <body>
+<canvas id="bg" aria-hidden="true"></canvas>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <symbol id="tg" viewBox="0 0 24 24"><path d="M21.5 3.3 2.6 10.600c-1.300.5-1.300 1.300-.2 1.600l4.800 1.500 1.800 5.600c.2.600.1.800.7.800.5 0 .7-.2 1-.5l2.300-2.200 4.800 3.500c.9.500 1.500.2 1.700-.8L23 4.700c.3-1.300-.5-1.900-1.500-1.400zM8.300 13l9.600-6c.5-.3.900-.1.500.2l-7.800 7.100-.3 3.300z"/></symbol>
 <symbol id="yt" viewBox="0 0 24 24"><path d="M23 7.200a3 3 0 0 0-2.100-2.100C19 4.600 12 4.600 12 4.600s-7 0-8.900.5A3 3 0 0 0 1 7.200C.5 9.100.5 12 .5 12s0 2.900.5 4.800a3 3 0 0 0 2.100 2.100c1.900.5 8.900.5 8.900.5s7 0 8.900-.5a3 3 0 0 0 2.100-2.100c.5-1.900.5-4.800.5-4.800s0-2.900-.5-4.800zM9.700 15.100V8.900l5.800 3.100z"/></symbol>
@@ -339,6 +372,31 @@ if(!ok)return;var t="Name: "+n+"\nProgram: "+$("fc").value+"\n\n"+m;try{navigato
 $("fr2").innerHTML="Direct submission is not connected yet. Your feedback is ready (copied if your browser allowed it). Please send it to <a href=\"https://t.me/crazy_pro_trader0\">Telegram support</a>. It will be published only after admin approval."};
 document.querySelectorAll(".dl").forEach(function(b){b.onclick=async function(){var k=b.dataset.f,m=$("dm");m.textContent="";try{var d=window.claude?await claude.use("downloads"):null;var bin=atob(PDF[k].d),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);var bl=new Blob([u],{type:"application/pdf"});if(d){await d.save({filename:PDF[k].n,data:bl})}else{var l=document.createElement("a");l.href=URL.createObjectURL(bl);l.download=PDF[k].n;document.body.appendChild(l);l.click();l.remove()}}catch(e){if(!e||e.code!=="declined")m.textContent="The download didn’t start. Please try again or contact support."}}});
 $("sd").onclick=function(){$("bt").scrollIntoView({behavior:"smooth",block:"start"})};
+(function(){var c=$("bg"),x=c.getContext("2d"),W=0,H=0,D=Math.min(window.devicePixelRatio||1,1.5),st=10,fr=0,sc=0,ca="#e5262d",cb="#ff8a1f",rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches,S=[],P=[];
+function rgb(h,a){h=h.trim().replace("#","");if(h.length===3)h=h.replace(/./g,"$&$&");var n=parseInt(h,16);return"rgba("+(n>>16&255)+","+(n>>8&255)+","+(n&255)+","+a+")"}
+function mk(mid,amp,sp,k){return{pts:[],off:0,v:0,y:0,mid:mid,amp:amp,sp:sp,k:k}}
+function stp(s){s.v=s.v*s.k+(Math.random()-.5)*s.amp;s.y+=s.v+(s.mid*H-s.y)*.012;s.y=Math.min(H*.85,Math.max(H*.15,s.y));s.pts.push(s.y)}
+function seed(){S=[mk(.58,1.9,.55,.93),mk(.42,1.4,.3,.95),mk(.72,1.6,.8,.94)];S.forEach(function(s){s.y=s.mid*H;s.pts=[];var n=Math.ceil(W/st)+4;for(var i=0;i<n;i++)stp(s)});P=[];for(var i=0;i<34;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.6,v:Math.random()*.25+.08,a:Math.random()*.35+.1})}
+function path(s){x.beginPath();for(var i=0;i<s.pts.length;i++){var px=i*st-s.off;if(i)x.lineTo(px,s.pts[i]);else x.moveTo(px,s.pts[i])}}
+function draw(){if(fr%40===0){var q=getComputedStyle(document.documentElement);ca=q.getPropertyValue("--a")||ca;cb=q.getPropertyValue("--b")||cb}
+x.clearRect(0,0,W,H);var m=S[0],X=W*.78,gs=80;x.lineWidth=1;x.strokeStyle="rgba(255,255,255,.045)";
+for(var g=1;g<8;g++){x.beginPath();x.moveTo(0,H*g/8);x.lineTo(W,H*g/8);x.stroke()}
+for(var gx=-(sc%gs);gx<W;gx+=gs){x.beginPath();x.moveTo(gx,0);x.lineTo(gx,H);x.stroke()}
+x.lineWidth=1.5;x.strokeStyle=rgb(ca,.3);path(S[1]);x.stroke();x.strokeStyle=rgb(cb,.24);path(S[2]);x.stroke();
+x.save();x.beginPath();x.rect(0,0,X,H);x.clip();
+path(m);var lx=(m.pts.length-1)*st-m.off;x.lineTo(lx,H);x.lineTo(-m.off,H);x.closePath();
+var ag=x.createLinearGradient(0,H*.2,0,H);ag.addColorStop(0,rgb(cb,.22));ag.addColorStop(1,rgb(cb,0));x.fillStyle=ag;x.fill();
+var lg=x.createLinearGradient(0,0,X,0);lg.addColorStop(0,rgb(ca,0));lg.addColorStop(.5,rgb(ca,.9));lg.addColorStop(1,rgb(cb,1));
+path(m);x.strokeStyle=lg;x.lineWidth=2.5;x.shadowColor=rgb(cb,.9);x.shadowBlur=14;x.stroke();x.shadowBlur=0;x.restore();
+var ix=(X+m.off)/st,i=Math.floor(ix),f=ix-i,y=m.pts[i]+((m.pts[i+1]||m.pts[i])-m.pts[i])*f;
+x.setLineDash([4,6]);x.lineWidth=1;x.strokeStyle=rgb(cb,.12);x.beginPath();x.moveTo(X,0);x.lineTo(X,H);x.stroke();x.strokeStyle=rgb(cb,.3);x.beginPath();x.moveTo(X,y);x.lineTo(W,y);x.stroke();x.setLineDash([]);
+var r=(fr%90)/90;x.strokeStyle=rgb(cb,.5*(1-r));x.lineWidth=1.5;x.beginPath();x.arc(X,y,5+22*r,0,6.2832);x.stroke();
+x.fillStyle=rgb(cb,1);x.shadowColor=rgb(cb,1);x.shadowBlur=16;x.beginPath();x.arc(X,y,4.5,0,6.2832);x.fill();x.shadowBlur=0;
+for(var k=0;k<P.length;k++){var p=P[k];x.fillStyle="rgba(255,255,255,"+p.a+")";x.beginPath();x.arc(p.x,p.y,p.r,0,6.2832);x.fill()}}
+function rs(){var ow=W;W=window.innerWidth;H=window.innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0);if(ow!==W)seed();draw()}
+function tick(){if(!document.hidden){S.forEach(function(s){s.off+=s.sp;if(s.off>=st){s.off-=st;s.pts.shift();stp(s)}});sc+=S[0].sp;P.forEach(function(p){p.y-=p.v;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}});fr++;draw()}requestAnimationFrame(tick)}
+window.addEventListener("resize",rs);rs();if(!rm)requestAnimationFrame(tick)})();
+if("IntersectionObserver"in window&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add("in");io.unobserve(t);setTimeout(function(){t.style.transitionDelay=""},1000)}})},{threshold:.08});document.querySelectorAll("main .glass").forEach(function(el){el.classList.add("rv");el.style.transitionDelay=(Array.prototype.indexOf.call(el.parentNode.children,el)%6)*70+"ms";io.observe(el)})}
 $("lg1").src=$("lg0").src;
 </script>
 </body>
